@@ -1,0 +1,28 @@
+name: Auto Commit and Push
+
+on:
+  push:
+    branches:
+      - main  # หรือชื่อ branch ที่คุณต้องการให้ trigger
+  pull_request:
+    branches:
+      - main  # หรือชื่อ branch ที่คุณต้องการให้ trigger
+
+jobs:
+  commit_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # เช็คเอาท์โค้ดจาก repository
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'Your GitHub Username'
+          git config --global user.email 'your-email@example.com'
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Auto commit: Updates from GitHub Actions"
+          git push origin main  # หรือ `git push origin master` ถ้าคุณใช้ master branch
+        continue-on-error: true  # หากไม่มีการเปลี่ยนแปลง จะไม่ทำให้ workflow ล้มเหลว
