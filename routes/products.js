@@ -11,10 +11,7 @@ router.post("/", (req, res) => {
         return res.status(400).json({ message: "Missing required fields (name, price, stock)" });
     }
 
-    const query = `
-        INSERT INTO products (name, price, stock, image, description, category)
-        VALUES (?, ?, ?, ?, ?, ?)
-    `;
+    const query = `INSERT INTO products (name, price, stock, image, description, category) VALUES (?, ?, ?, ?, ?, ?)`;
     const values = [name, price, stock, image || null, description || null, category || null];
 
     db.query(query, values, (err, result) => {

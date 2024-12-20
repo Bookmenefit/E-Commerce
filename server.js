@@ -17,6 +17,7 @@ app.use("/api/products", require("./routes/products"));
 app.use("/api/cart", require("./routes/cart"));
 
 // Route ตรวจสอบ API
+
 app.get("/", (req, res) => {
   res.send("E-commerce API is running...");
 });
